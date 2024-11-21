@@ -1,18 +1,17 @@
+from flask import Flask, request, redirect
+from threading import Thread
 import requests
 import json
-from flask import Flask, request, redirect
-from fetch_credentials import fetch_credentials  # Import the function
+import os
+from fetch_credentials import fetch_credentials
 
-# Fetch credentials from file or environment variables
 CLIENT_ID, CLIENT_SECRET = fetch_credentials()
-REDIRECT_URI = "http://127.0.0.1:5000/callback"  # Flask server running locally
+REDIRECT_URI = "http://127.0.0.1:5000/callback"
 
-# Flask app setup
 app = Flask(__name__)
 
 @app.route("/")
 def home():
-    # Step 1: Redirect user to Strava authorization page
     auth_url = (
         f"https://www.strava.com/oauth/authorize"
         f"?client_id={CLIENT_ID}"
@@ -24,12 +23,12 @@ def home():
 
 @app.route("/callback")
 def callback():
-    # Step 2: Strava redirects back to this route with a code
     code = request.args.get("code")
+    exit_flag = request.args.get("exit")
+
     if not code:
         return "Authorization failed. Please try again."
 
-    # Step 3: Exchange authorization code for an access token
     token_response = requests.post(
         "https://www.strava.com/oauth/token",
         data={
@@ -43,12 +42,16 @@ def callback():
     if "access_token" not in token_data:
         return "Failed to retrieve access token. Please try again."
 
-    # Save the access token for future use
     with open("strava_token.json", "w") as f:
         json.dump(token_data, f)
+
+    if exit_flag:
+        def shutdown():
+            os._exit(0)
+        Thread(target=shutdown).start()
+
     return "Authorization successful! You can close this window."
 
 if __name__ == "__main__":
-    # Start the Flask web server
     print("Open your browser and navigate to http://127.0.0.1:5000 to log in.")
     app.run(port=5000)

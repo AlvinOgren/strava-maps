@@ -1,12 +1,21 @@
+import os
 import json
-import requests
 import time
+import requests
 from fetch_credentials import fetch_credentials
 
 def refresh_token():
-    """Refresh the Strava access token if expired."""
+    if not os.path.exists("strava_token.json"):
+        raise FileNotFoundError("Token file not found. Please authorize first.")
+
     with open("strava_token.json") as f:
-        token_data = json.load(f)
+        try:
+            token_data = json.load(f)
+        except json.JSONDecodeError:
+            raise ValueError("Invalid token file format.")
+
+    if "expires_at" not in token_data or "refresh_token" not in token_data:
+        raise ValueError("Incomplete token data. Please reauthorize.")
 
     if token_data["expires_at"] < time.time():
         client_id, client_secret = fetch_credentials()
