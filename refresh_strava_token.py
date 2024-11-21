@@ -31,7 +31,7 @@ def refresh_token():
         new_token_data = response.json()
         with open("strava_token.json", "w") as f:
             json.dump(new_token_data, f)
-        print("Token refreshed!")
+        print("Token refreshed")
         return new_token_data["access_token"]
 
     return token_data["access_token"]

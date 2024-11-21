@@ -7,10 +7,10 @@ from generate_map import generate_map  # Map generation functionality
 
 def authorize_user():
     """Start the Flask app to authorize the user."""
-    print("Step 1: Authorizing with Strava...")
+    print("Authorizing with Strava...")
     try:
         process = subprocess.Popen(["python3", "strava_authorization.py"])
-        print("\nOnce authorized, return to this terminal. Waiting for authorization...\n")
+        print("Once authorized, return to this terminal. Waiting for authorization...\n")
         
         # Wait for the token file to be created
         while not os.path.exists("strava_token.json"):
@@ -30,7 +30,7 @@ def authorize_user():
 
 def generate_and_open_map():
     """Generate the map and open it in the browser."""
-    print("\nStep 2: Generating the map...")
+    print("Generating the map...")
     try:
         # Refresh token and ensure it's valid
         access_token = refresh_token()
@@ -40,7 +40,7 @@ def generate_and_open_map():
         print(f"Map generated successfully: {map_path}")
 
         # Open the map in the browser
-        print("Step 3: Opening the map in your default browser...")
+        print("Opening the map in your default browser...")
         webbrowser.open(f"file://{os.path.abspath(map_path)}")
     except Exception as e:
         print(f"Failed to generate the map: {e}")
@@ -50,4 +50,4 @@ if __name__ == "__main__":
     print("Welcome to the Strava Map Generator!")
     authorize_user()
     generate_and_open_map()
-    print("\nAll done! Enjoy exploring your rides on the map.")
+    print("\nProgram finished")
