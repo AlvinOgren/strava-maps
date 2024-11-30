@@ -3,6 +3,7 @@ from threading import Thread
 import requests
 import json
 import os
+import webbrowser
 from fetch_credentials import fetch_credentials
 
 CLIENT_ID, CLIENT_SECRET = fetch_credentials()
@@ -53,5 +54,6 @@ def callback():
     return "Authorization successful! You can close this window."
 
 if __name__ == "__main__":
-    print("Open your browser and navigate to http://127.0.0.1:5000 to log in.")
+    print("Starting server...")
+    webbrowser.open("http://127.0.0.1:5000")  # Open the browser directly
     app.run(port=5000)
