@@ -46,12 +46,23 @@ def generate_map(access_token, map_type="polyline"):
             for act in activities if "summary_polyline" in act["map"] and act["map"]["summary_polyline"]
         ]
         for ride in rides:
-            folium.PolyLine(ride["coordinates"], color="blue", weight=3, opacity=0.7).add_to(m)
             # Construct Strava activity link
             activity_url = f"https://www.strava.com/activities/{ride['id']}"
+            popup_html = f"<a href='{activity_url}' target='_blank'>{ride['name']}</a>"
+
+            # Add the PolyLine with a popup
+            folium.PolyLine(
+                ride["coordinates"], 
+                color="blue", 
+                weight=3, 
+                opacity=0.7, 
+                popup=folium.Popup(popup_html, max_width=300)
+            ).add_to(m)
+
+            # Optionally add a marker at the start
             folium.Marker(
                 location=ride["coordinates"][0],
-                popup=f"<a href='{activity_url}' target='_blank'>{ride['name']}</a>",
+                popup=folium.Popup(popup_html, max_width=300),
             ).add_to(m)
 
     map_path = "rides_map.html"
