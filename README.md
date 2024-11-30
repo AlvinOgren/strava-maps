@@ -10,12 +10,8 @@ Go to the Strava Developer Portal (https://developers.strava.com/) and log in wi
 
 Click on "Create & Manage My API Application".
 
-Fill out the application form with the following details:
+Fill out the application form.
 
-Application Name: Choose a name for your app (e.g., "My Strava Map Tool").
-Category: Select a category (e.g., "Personal" or "Development").
-Website: Provide any URL, such as a personal website or placeholder (e.g., https://example.com).
-Authorization Callback Domain: Enter http://127.0.0.1:5000 (or the domain your app will run on). This is required for the OAuth flow.
 Save the application by clicking Save or Create. After saving, you’ll be redirected to a page displaying your app's Client ID and Client Secret.
 
 To run the program: python3 main.py. Follow the provided link and authorize
