@@ -3,13 +3,35 @@ from threading import Thread
 import requests
 import json
 import os
-import webbrowser
+import subprocess
 from fetch_credentials import fetch_credentials
 
 CLIENT_ID, CLIENT_SECRET = fetch_credentials()
 REDIRECT_URI = "http://127.0.0.1:5000/callback"
 
 app = Flask(__name__)
+
+def authorize_user():
+    """Start the Flask app to authorize the user."""
+    print("Authorizing with Strava...")
+    try:
+        process = subprocess.Popen(["python3", "strava_authorization.py"])
+        print("Once authorized, return to this terminal. Waiting for authorization...\n")
+        
+        # Wait for the token file to be created
+        while not os.path.exists("strava_token.json"):
+            time.sleep(1)
+
+        print("Authorization successful! Terminating Flask process...")
+        process.terminate()
+    except KeyboardInterrupt:
+        print("Authorization canceled by user.")
+        process.terminate()
+        exit(1)
+
+    if not os.path.exists("strava_token.json"):
+        print("Authorization failed. Please try again.")
+        exit(1)
 
 @app.route("/")
 def home():

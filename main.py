@@ -4,28 +4,7 @@ import subprocess
 import time
 from refresh_strava_token import refresh_token  # Refresh token functionality
 from generate_map import generate_map  # Map generation functionality
-
-def authorize_user():
-    """Start the Flask app to authorize the user."""
-    print("Authorizing with Strava...")
-    try:
-        process = subprocess.Popen(["python3", "strava_authorization.py"])
-        print("Once authorized, return to this terminal. Waiting for authorization...\n")
-        
-        # Wait for the token file to be created
-        while not os.path.exists("strava_token.json"):
-            time.sleep(1)
-
-        print("Authorization successful! Terminating Flask process...")
-        process.terminate()
-    except KeyboardInterrupt:
-        print("Authorization canceled by user.")
-        process.terminate()
-        exit(1)
-
-    if not os.path.exists("strava_token.json"):
-        print("Authorization failed. Please try again.")
-        exit(1)
+from strava_authorization import authorize_user
 
 
 def generate_and_open_map():
