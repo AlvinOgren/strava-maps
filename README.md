@@ -1,6 +1,6 @@
 # Strava Maps
 
-A Python application for visualizing users Strava activities on an interactive map. The project allows the user to authenticate with the Strava API, fetch their activities data and generate a map based on that data.
+Python application for visualizing and finding the titles of a user's Strava activities on an interactive map. The project allows the user to authenticate with the Strava API, fetch their activities' data, and generate a map based on that data.
 
 ## Install Dependencies
 To install the required libraries:
@@ -29,10 +29,16 @@ To run the program:
 - `strava_token.json`: Stores the access and refresh tokens. This file will automatically be created after you have run the program.
 
 ## Requirements
-This project requires Flask, folium, polyline and requests.
+This project requires Flask, folium, polyline, and requests.
 
 These, with their correct versions, can be installed using:
 
 `pip install -r requirements.txt`
 
 Of course, you also need to [create a Strava app](#configure-strava-api-access).
+
+## Output Example
+
+Here is an example of a generated map:
+
+![Generated Map](images/map_screenshot.png)
