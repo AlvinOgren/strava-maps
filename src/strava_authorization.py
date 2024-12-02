@@ -7,8 +7,13 @@ import subprocess
 import time
 from fetch_credentials import fetch_credentials
 
+
 CLIENT_ID, CLIENT_SECRET = fetch_credentials()
 REDIRECT_URI = "http://127.0.0.1:5000/callback"
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+CONFIG_PATH = os.path.join(BASE_DIR, "config/strava_token.json")
+TOKEN_PATH = os.path.join(BASE_DIR, "config", "strava_token.json")
 
 app = Flask(__name__)
 
@@ -16,11 +21,11 @@ def authorize_user():
     """Start the Flask app to authorize the user."""
     print("Authorizing with Strava...")
     try:
-        process = subprocess.Popen(["python3", "strava_authorization.py"])
+        process = subprocess.Popen(["python3", "src/strava_authorization.py"])
         print("Once authorized, return to this terminal. Waiting for authorization...\n")
         
         # Wait for the token file to be created
-        while not os.path.exists("strava_token.json"):
+        while not os.path.exists(TOKEN_PATH):
             time.sleep(1)
 
         print("Authorization successful! Terminating Flask process...")
@@ -30,7 +35,7 @@ def authorize_user():
         process.terminate()
         exit(1)
 
-    if not os.path.exists("strava_token.json"):
+    if not os.path.exists(TOKEN_PATH):
         print("Authorization failed. Please try again.")
         exit(1)
 
@@ -48,8 +53,6 @@ def home():
 @app.route("/callback")
 def callback():
     code = request.args.get("code")
-    exit_flag = request.args.get("exit")
-
     if not code:
         return "Authorization failed. Please try again."
 
@@ -66,13 +69,9 @@ def callback():
     if "access_token" not in token_data:
         return "Failed to retrieve access token. Please try again."
 
-    with open("strava_token.json", "w") as f:
+    # Write token data to the correct location
+    with open(CONFIG_PATH, "w") as f:
         json.dump(token_data, f)
-
-    if exit_flag:
-        def shutdown():
-            os._exit(0)
-        Thread(target=shutdown).start()
 
     return "Authorization successful! You can close this window."
 

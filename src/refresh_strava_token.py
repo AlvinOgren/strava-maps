@@ -4,11 +4,14 @@ import time
 import requests
 from fetch_credentials import fetch_credentials
 
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+TOKEN_PATH = os.path.join(BASE_DIR, "config", "strava_token.json")
+
 def refresh_token():
-    if not os.path.exists("strava_token.json"):
+    if not os.path.exists(TOKEN_PATH):
         raise FileNotFoundError("Token file not found. Please authorize first.")
 
-    with open("strava_token.json") as f:
+    with open(TOKEN_PATH) as f:
         try:
             token_data = json.load(f)
         except json.JSONDecodeError:
@@ -29,7 +32,7 @@ def refresh_token():
             },
         )
         new_token_data = response.json()
-        with open("strava_token.json", "w") as f:
+        with open(TOKEN_PATH, "w") as f:
             json.dump(new_token_data, f)
         print("Token refreshed")
         return new_token_data["access_token"]

@@ -3,7 +3,7 @@ import json
 
 def fetch_credentials():
     """Fetch Client ID and Secret from a JSON file or environment variables."""
-    credentials_path = "strava_credentials.json"
+    credentials_path = "config/strava_credentials.json"
 
     if os.path.exists(credentials_path):
         with open(credentials_path, "r") as f:
