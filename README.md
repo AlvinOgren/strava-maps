@@ -4,6 +4,7 @@ A Python application for visualizing users Strava activities on an interactive m
 
 ## Install Dependencies
 To install the required libraries:
+
 `pip install -r requirements.txt`
 
 ## Configure Strava API Access
