@@ -4,7 +4,7 @@ A Python application for visualizing users Strava activities on an interactive m
 
 ## Install Dependencies
 To install the required libraries:
-pip install -r `requirements.txt`
+`pip install -r requirements.txt`
 
 ## Configure Strava API Access
 1. Create an application in the [Strava Developer Portal](https://developers.strava.com/).
@@ -15,7 +15,7 @@ pip install -r `requirements.txt`
 
 ## Usage
 To run the program:
-python3 `main.py`
+`python3 main.py`
 
 - Follow the link provided in the terminal to authorize the application.
 - Once authorized, `strava_token.json` will store your access token for future use.
@@ -30,6 +30,6 @@ python3 `main.py`
 This project requires Flask, folium, polyline and requests.
 
 These, with their correct versions, can be installed using:
-pip install -r `requirements.txt`
+`pip install -r requirements.txt`
 
 Of course, you also need to [create a Strava app](#configure-strava-api-access).
