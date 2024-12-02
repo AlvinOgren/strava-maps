@@ -40,6 +40,7 @@ def authorize_user():
 
 @app.route("/")
 def home():
+    """Redirects the user to Strava's OAuth authorization page."""
     auth_url = (
         f"https://www.strava.com/oauth/authorize"
         f"?client_id={CLIENT_ID}"
@@ -51,6 +52,7 @@ def home():
 
 @app.route("/callback")
 def callback():
+    """Handle the OAuth callback and exchange the authorization code for an access token."""
     code = request.args.get("code")
     if not code:
         return "Authorization failed. Please try again."

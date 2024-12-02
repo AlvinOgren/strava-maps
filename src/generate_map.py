@@ -4,6 +4,7 @@ from polyline import decode
 import requests
 
 def fetch_activities(access_token):
+    """Fetch all activities of the authenticated user from the Strava API."""
     headers = {"Authorization": f"Bearer {access_token}"}
     url = "https://www.strava.com/api/v3/athlete/activities"
     activities = []
@@ -24,6 +25,7 @@ def fetch_activities(access_token):
     return activities
 
 def generate_map(access_token, map_type="polyline"):
+    """Generate an interactive map of Strava activities based on the specified map type."""
     activities = fetch_activities(access_token)
     m = folium.Map(location=[58.4108, 15.6214], zoom_start=12)
 

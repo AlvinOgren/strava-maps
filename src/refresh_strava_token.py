@@ -8,6 +8,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TOKEN_PATH = os.path.join(BASE_DIR, "config", "strava_token.json")
 
 def refresh_token():
+    """Refresh the Strava API access token if it has expired."""
     if not os.path.exists(TOKEN_PATH):
         raise FileNotFoundError("Token file not found. Please authorize first.")
 
