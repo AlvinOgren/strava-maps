@@ -2,6 +2,10 @@ import json
 import folium
 from polyline import decode
 import requests
+import os
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+OUTPUT_PATH = os.path.join(BASE_DIR, "output", "rides_map.html")
 
 def fetch_activities(access_token):
     """Fetch all activities of the authenticated user from the Strava API."""
@@ -67,6 +71,5 @@ def generate_map(access_token, map_type="polyline"):
                 popup=folium.Popup(popup_html, max_width=300),
             ).add_to(m)
 
-    map_path = "rides_map.html"
-    m.save(map_path)
-    return map_path
+    m.save(OUTPUT_PATH)
+    return OUTPUT_PATH
