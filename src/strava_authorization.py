@@ -13,6 +13,7 @@ REDIRECT_URI = "http://127.0.0.1:5000/callback"
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CONFIG_PATH = os.path.join(BASE_DIR, "config/strava_token.json")
 TOKEN_PATH = os.path.join(BASE_DIR, "config", "strava_token.json")
+STRAVA_AUTHORIZATION_PATH = os.path.join(BASE_DIR, "src", "strava_authorization.py")
 
 app = Flask(__name__)
 
@@ -20,7 +21,7 @@ def authorize_user():
     """Start the Flask app to authorize the user."""
     print("Authorizing with Strava...")
     try:
-        process = subprocess.Popen(["python3", "src/strava_authorization.py"])
+        process = subprocess.Popen(["python3", STRAVA_AUTHORIZATION_PATH])
         print("Once authorized, return to this terminal. Waiting for authorization...\n")
         
         # Wait for the token file to be created
