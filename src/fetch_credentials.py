@@ -1,9 +1,11 @@
 import os
 import json
 
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+credentials_path = os.path.join(BASE_DIR, "config", "strava_credentials.json")
+
 def fetch_credentials():
     """Fetch Client ID and Secret from a JSON file or environment variables."""
-    credentials_path = "config/strava_credentials.json"
 
     if os.path.exists(credentials_path):
         with open(credentials_path, "r") as f:
