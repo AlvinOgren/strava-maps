@@ -41,4 +41,4 @@ Of course, you also need to [create a Strava app](#configure-strava-api-access).
 
 Here is an example of a generated map:
 
-![Generated Map](images/map_screenshot.png)
+![Generated Map](images/map_output_screenshot.png)
