@@ -15,6 +15,7 @@ To install the required libraries:
 
 ## Usage
 To run the program:
+
 `python3 main.py`
 
 - Follow the link provided in the terminal to authorize the application.
@@ -30,6 +31,7 @@ To run the program:
 This project requires Flask, folium, polyline and requests.
 
 These, with their correct versions, can be installed using:
+
 `pip install -r requirements.txt`
 
 Of course, you also need to [create a Strava app](#configure-strava-api-access).
