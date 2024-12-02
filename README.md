@@ -7,6 +7,10 @@ To install the required libraries:
 
 `pip install -r requirements.txt`
 
+Or run:
+
+`python3 setup.py`
+
 ## Configure Strava API Access
 1. Create an application in the [Strava Developer Portal](https://developers.strava.com/).
 
