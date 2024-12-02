@@ -7,7 +7,6 @@ import subprocess
 import time
 from fetch_credentials import fetch_credentials
 
-
 CLIENT_ID, CLIENT_SECRET = fetch_credentials()
 REDIRECT_URI = "http://127.0.0.1:5000/callback"
 
@@ -78,5 +77,3 @@ def callback():
 if __name__ == "__main__":
     print("Open your browser and navigate to http://127.0.0.1:5000 to log in.")
     app.run(port=5000)
-
-

@@ -27,7 +27,7 @@ def generate_map(access_token, map_type="polyline"):
     activities = fetch_activities(access_token)
     m = folium.Map(location=[58.4108, 15.6214], zoom_start=12)
 
-    if map_type == "heatmap":
+    if map_type == "heatmap": # not fully finished
         from folium.plugins import HeatMap
         all_coords = [
             coord

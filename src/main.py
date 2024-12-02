@@ -2,8 +2,8 @@ import os
 import webbrowser
 import subprocess
 import time
-from refresh_strava_token import refresh_token  # Refresh token functionality
-from generate_map import generate_map  # Map generation functionality
+from refresh_strava_token import refresh_token
+from generate_map import generate_map
 from strava_authorization import authorize_user
 
 
@@ -15,7 +15,7 @@ def generate_and_open_map():
         access_token = refresh_token()
 
         # Generate the map
-        map_path = generate_map(access_token, map_type="polyline")  # or "heatmap"
+        map_path = generate_map(access_token, map_type="polyline")  # or "heatmap" (might not work perfectly, but is not necessary for the project)
         print(f"Map generated successfully: {map_path}")
 
         # Open the map in the browser
